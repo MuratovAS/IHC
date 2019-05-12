@@ -473,10 +473,10 @@ void menu2()
         if (enc1.isRight())
         {
           if (menu_pos >= 0 && menu_pos < 3)
-            *((unsigned int*)structure_field[menu_pos]) < 999 ? *((unsigned int*)structure_field[menu_pos]) += 1: *((unsigned int*)structure_field[menu_pos]) = 999;
+            *((unsigned int*)structure_field[menu_pos]) < 3000 ? *((unsigned int*)structure_field[menu_pos]) += 1: *((unsigned int*)structure_field[menu_pos]) = 3000;
           else
             if (menu_pos >= 3 && menu_pos < 5)
-              *((double*)structure_field[menu_pos]) < 10 ? *((double*)structure_field[menu_pos]) += 0.02: *((double*)structure_field[menu_pos]) = 10;
+              *((double*)structure_field[menu_pos]) < 50 ? *((double*)structure_field[menu_pos]) += 0.05: *((double*)structure_field[menu_pos]) = 50;
             else
               *((byte*)structure_field[menu_pos]) < 90 ? *((byte*)structure_field[menu_pos]) += 1: *((byte*)structure_field[menu_pos]) = 90;  
         }
@@ -487,7 +487,7 @@ void menu2()
             *((unsigned int*)structure_field[menu_pos]) > 0 ? *((unsigned int*)structure_field[menu_pos]) -= 1: *((unsigned int*)structure_field[menu_pos]) = 0;
           else
             if (menu_pos >= 3 && menu_pos < 5)
-              *((double*)structure_field[menu_pos]) > -10 ? *((double*)structure_field[menu_pos]) -= 0.02: *((double*)structure_field[menu_pos]) = -10;
+              *((double*)structure_field[menu_pos]) > -50 ? *((double*)structure_field[menu_pos]) -= 0.05: *((double*)structure_field[menu_pos]) = -50;
             else
               *((byte*)structure_field[menu_pos]) > 1 ? *((byte*)structure_field[menu_pos]) -= 1: *((byte*)structure_field[menu_pos]) = 1;
         }
@@ -495,10 +495,10 @@ void menu2()
         if (enc1.isFastR())
         {
           if (menu_pos >= 0 && menu_pos < 3)
-            *((unsigned int*)structure_field[menu_pos]) < 999-3 ? *((unsigned int*)structure_field[menu_pos]) += 3: *((unsigned int*)structure_field[menu_pos]) = 999;
+            *((unsigned int*)structure_field[menu_pos]) < 3000-3 ? *((unsigned int*)structure_field[menu_pos]) += 3: *((unsigned int*)structure_field[menu_pos]) = 3000;
           else
             if (menu_pos >= 3 && menu_pos < 5)
-              *((double*)structure_field[menu_pos]) < 10-0.05 ? *((double*)structure_field[menu_pos]) += 0.05: *((double*)structure_field[menu_pos]) = 10;
+              *((double*)structure_field[menu_pos]) < 50-0.05 ? *((double*)structure_field[menu_pos]) += 0.1: *((double*)structure_field[menu_pos]) = 50;
             else
               *((byte*)structure_field[menu_pos]) < 90-3 ? *((byte*)structure_field[menu_pos]) += 3: *((byte*)structure_field[menu_pos]) = 90;
         }
@@ -509,7 +509,7 @@ void menu2()
             *((unsigned int*)structure_field[menu_pos]) > 0+3 ? *((unsigned int*)structure_field[menu_pos]) -= 3: *((unsigned int*)structure_field[menu_pos]) = 0;
           else
             if (menu_pos >= 3 && menu_pos < 5)
-              *((double*)structure_field[menu_pos]) > -10+3 ? *((double*)structure_field[menu_pos]) -= 0.05: *((double*)structure_field[menu_pos]) = -10;
+              *((double*)structure_field[menu_pos]) > -50+3 ? *((double*)structure_field[menu_pos]) -= 0.1: *((double*)structure_field[menu_pos]) = -50;
             else
               *((byte*)structure_field[menu_pos]) > 1+3 ? *((byte*)structure_field[menu_pos]) -= 3: *((byte*)structure_field[menu_pos]) = 1;
         } 
