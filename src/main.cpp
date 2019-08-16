@@ -591,7 +591,6 @@ void setup()
   getEEPROM();
 
   Serial.begin(9600);
-  u8g2.begin();
   
   BottomPID.SetOutputLimits(0, EEprom.Pulse); //regulation limit
   BottomPID.SetMode(MANUAL); //PID to manual (stop)
@@ -614,6 +613,10 @@ void setup()
   
   pinMode(Pin_ENC_SW, INPUT);          
   digitalWrite(Pin_ENC_SW, HIGH);//20k vcc
+
+  u8g2.begin();
+  delay(100);
+  u8g2.begin();
 }
 
 void loop() 
