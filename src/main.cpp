@@ -41,7 +41,7 @@ struct EEpromStruct {
 /////////////////////////////////////////////////////////////////////////////////display
 //128x64
 
-U8G2_SSD1306_128X64_NONAME_1_HW_I2C u8g2(U8G2_R0, /* reset=*/ U8X8_PIN_NONE, /* clock=*/ 16, /* data=*/ 17);
+U8G2_SSD1306_128X64_NONAME_1_HW_I2C u8g2(U8G2_R2, /* reset=*/ U8X8_PIN_NONE, /* clock=*/ 16, /* data=*/ 17);//Rotation 180
 //U8G2_SH1106_128X64_NONAME_1_HW_I2C u8g2(U8G2_R0, /* reset=*/ U8X8_PIN_NONE, /* clock=*/ 16, /* data=*/ 17);
 
 /////////////////////////////////////////////////////////////////////////////////MAX6675
@@ -687,49 +687,57 @@ void loop()
     //thermocouple test
     if(on_off == true)
     {
-      if(ErrorRate_count <= 5)
+      if(T_Set >= T_Bottom)
       {
-        ErrorRate_buf = (ErrorRate_buf +(T_Bottom/T_Set)*100)/2;
-        ErrorRate_count++;
-      }
-      else 
-      {
-        if(100 - ErrorRate_buf > EEprom.ErrorRate)
+        if(ErrorRate_count <= 5)
         {
-          String tmp = "";
-          tmp += String(100 - ErrorRate_buf);
-          tmp += "\% > ";
-          tmp += String(EEprom.ErrorRate);
-          tmp += "\%";
-          char charVar[11];
-          tmp.toCharArray(charVar, 11);
-          
-          StopHot();
-
-          u8g2.firstPage();
-          do {
-            u8g2.setFontMode(1);
-            u8g2.setFont(u8g2_font_6x10_tf);
-            u8g2.setDrawColor(1);
-            u8g2.drawStr(40, 10, "ERROR!!!");
-            u8g2.drawStr(19, 25, "NO Thermocouple");
-            u8g2.drawStr(37, 40, charVar);
-            u8g2.drawStr(52, 55, " OK ");
-            u8g2.setDrawColor(2); 
-            u8g2.drawBox(52, 47, 24, 10);
-          } while(u8g2.nextPage() );
-          Serial.print("ERROR ");
-          Serial.print(tmp);
-          Serial.print("\n");
-
-          while(true)
-          {
-            enc1.tick();
-            delay(200);
-            if (enc1.isHold())
-              break;
-          }
+          ErrorRate_buf = (ErrorRate_buf +(T_Bottom/T_Set)*100)/2;
+          ErrorRate_count++;
         }
+        else 
+        {
+          if(100 - ErrorRate_buf > EEprom.ErrorRate)
+          {
+            String tmp = "";
+            tmp += String(100 - ErrorRate_buf);
+            tmp += "\% > ";
+            tmp += String(EEprom.ErrorRate);
+            tmp += "\%";
+            char charVar[11];
+            tmp.toCharArray(charVar, 11);
+            
+            StopHot();
+
+            u8g2.firstPage();
+            do {
+              u8g2.setFontMode(1);
+              u8g2.setFont(u8g2_font_6x10_tf);
+              u8g2.setDrawColor(1);
+              u8g2.drawStr(40, 10, "ERROR!!!");
+              u8g2.drawStr(19, 25, "NO Thermocouple");
+              u8g2.drawStr(37, 40, charVar);
+              u8g2.drawStr(52, 55, " OK ");
+              u8g2.setDrawColor(2); 
+              u8g2.drawBox(52, 47, 24, 10);
+            } while(u8g2.nextPage() );
+            Serial.print("ERROR ");
+            Serial.print(tmp);
+            Serial.print("\n");
+
+            while(true)
+            {
+              enc1.tick();
+              delay(200);
+              if (enc1.isHold())
+                break;
+            }
+          }
+          ErrorRate_count = 0;
+          ErrorRate_buf = 0;
+        }
+      }
+      else
+      {
         ErrorRate_count = 0;
         ErrorRate_buf = 0;
       }
@@ -758,7 +766,7 @@ void loop()
       digitalWrite(Pin_HOT, 0);
   }
 
-  //UART
+/*  //UART
   if (on_off == true && Time > TimeCOM + 1000) 
   {
     Serial.print("Mode: ");
@@ -794,6 +802,7 @@ void loop()
 
     TimeCOM = millis();
   }
+*/
 
   //display
   if (Time > TimeSSD + (on_off == true ? 500 : 100)) 
