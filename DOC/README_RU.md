@@ -50,11 +50,15 @@ Infrared Heating Controller  aka.  инфракрасная станция
 ### Меню настроек
 
 ![пример настроек термопрофиля](https://github.com/MuratovAS/ihc/blob/master/DOC/conf.jpg)
+	
+
 	//profile
 	Tn – температура фазы n
 	tn – время в фазе n
 
 ![пример системных настроек](https://github.com/MuratovAS/ihc/blob/master/DOC/set.jpg)
+	
+
 	//setting
 	Pu - ширина импульса
 	P - пропорциональная составляющая 
